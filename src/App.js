@@ -42,6 +42,13 @@ function App() {
   useEffect(() => {
     getData();
   }, []);
+
+  
+  const handleSelectionChange = (rows) => {
+    const selectedRowsLimited = rows.slice(0, 10); // Limit selection to the first 10 rows
+    setSelectedRows(selectedRowsLimited);
+  };
+
   return (
     <div className="App">
       <MaterialTable
@@ -125,6 +132,11 @@ function App() {
             },
           },
         ]}
+        onSelectionChange={handleSelectionChange}
+        isAllSelected={(rowData) =>
+          selectedRows.length === Math.min(10, rowData.length)
+        }
+        
         
       />
     </div>
